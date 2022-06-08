@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Location } from 'react-router-dom';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -22,17 +21,14 @@ const userAvatarStyle = {
 
 interface MyProps {
   items: any[];
-  location: Location;
 }
 
 interface props {
   item: any;
-  location: Location;
 }
 
 interface MyState {
   collapsed: boolean;
-  active: boolean;
 }
 
 class SidebarItem extends Component<props, MyState> {
@@ -40,11 +36,9 @@ class SidebarItem extends Component<props, MyState> {
     super(props);
     this.state = {
       collapsed: false,
-      active: false,
     };
   }
 
-  location = this.props.location;
   onClickProp = this.props.item.onClick;
   label = this.props.item.label;
   Icon = this.props.item.Icon;
@@ -120,10 +114,7 @@ class SidebarItem extends Component<props, MyState> {
                     {subItem === 'divider' ? (
                       <Divider sx={{ backgroundColor: 'hsla(0,0%,100%,.3)' }} />
                     ) : (
-                      <SidebarItem
-                        item={subItem}
-                        location={this.props.location}
-                      />
+                      <SidebarItem item={subItem} />
                     )}
                   </React.Fragment>
                 ))}
@@ -137,7 +128,6 @@ class SidebarItem extends Component<props, MyState> {
 }
 
 class Sidebar extends Component<MyProps> {
-  location = this.props.location;
   render() {
     return (
       <List disablePadding dense>
@@ -146,7 +136,7 @@ class Sidebar extends Component<MyProps> {
             {sidebarItem === 'divider' ? (
               <Divider sx={{ backgroundColor: 'hsla(0,0%,100%,.3)' }} />
             ) : (
-              <SidebarItem item={sidebarItem} location={this.location} />
+              <SidebarItem item={sidebarItem} />
             )}
           </React.Fragment>
         ))}
